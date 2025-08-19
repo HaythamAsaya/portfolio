@@ -965,7 +965,6 @@ V 1.0
             
             <form class="contact-form" id="contactForm" name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true">
                 <input type="hidden" name="form-name" value="contact">
-                <div id="statusMessage" class="status-message"></div>
                 
                 <div class="form-group">
                     <label for="name">Name
@@ -1021,6 +1020,7 @@ V 1.0
                     <span id="submitText">Send Message</span>
                     <span id="submitLoader" class="loading" style="display: none;"></span>
                 </button>
+                <div id="statusMessage" class="status-message"></div>
             </form>
         </div>
     </section>
@@ -1101,53 +1101,67 @@ V 1.0
             window.open('https://purrplesky.netlify.app/', '_blank'); // Replace with your game URL
         });
         const contactForm = document.getElementById('contactForm');
-        
-        contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+        const statusMessage = document.getElementById('statusMessage');
 
-    const submitBtn = document.querySelector('.submit-btn');
-    const submitText = document.getElementById('submitText');
-    const submitLoader = document.getElementById('submitLoader');
-    const statusMessage = document.getElementById('statusMessage');
+contactForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-    // Show loading state
-    submitText.style.display = 'none';
-    submitLoader.style.display = 'inline-block';
-    submitBtn.disabled = true;
+  const submitBtn = document.querySelector('.submit-btn');
+  const submitText = document.getElementById('submitText');
+  const submitLoader = document.getElementById('submitLoader');
 
-    const formData = new FormData(contactForm);
+  // Show loader
+  submitText.style.display = 'none';
+  submitLoader.style.display = 'inline-block';
+  submitBtn.disabled = true;
 
-    try {
-        // AJAX submission to Netlify
-        const response = await fetch("/?no-redirect=1", {
-            method: "POST",
-            body: formData,
-            headers: { "Accept": "application/json" }
-        });
+  const formData = new FormData(contactForm);
 
-        if (response.ok) {
-            showStatus("✅ Thank you! Your message has been sent successfully.", "success");
-            contactForm.reset();
-            statusMessage.scrollIntoView({ behavior: "smooth", block: "center" });
-            await sendAnalytics("contact_form_submission", Object.fromEntries(formData));
-        } else if (response.status === 400) {
-            showStatus("⚠️ Please complete the reCAPTCHA before submitting.", "error");
-            statusMessage.scrollIntoView({ behavior: "smooth", block: "center" });
-        } else {
-            showStatus("❌ Sorry, there was an error sending your message. Please try again.", "error");
-            statusMessage.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
+  try {
+    // Netlify AJAX submission
+    const response = await fetch('/?no-redirect=1', {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
 
-    } catch (error) {
-        showStatus("⚠️ Network error. Please try again later.", "error");
-        statusMessage.scrollIntoView({ behavior: "smooth", block: "center" });
-    } finally {
-        // Reset button state
-        submitText.style.display = "inline";
-        submitLoader.style.display = "none";
-        submitBtn.disabled = false;
+    if ([200, 302, 303].includes(response.status)) {
+      showStatus('✅ Thank you! Your message has been sent successfully.', 'success');
+      contactForm.reset();
+    } else if (response.status === 400) {
+      showStatus('⚠️ Please complete the reCAPTCHA before submitting.', 'error');
+    } else {
+      showStatus('❌ There was an error sending your message. Please try again.', 'error');
     }
+
+  } catch (error) {
+    showStatus('⚠️ Network error. Please try again later.', 'error');
+  } finally {
+    // Reset button state
+    submitText.style.display = 'inline';
+    submitLoader.style.display = 'none';
+    submitBtn.disabled = false;
+    statusMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 });
+
+// Show message function
+function showStatus(message, type) {
+  statusMessage.textContent = message;
+  statusMessage.className = `status-message status-${type} show`;
+
+  // Auto-hide after 5 seconds
+  setTimeout(() => {
+    statusMessage.classList.remove('show');
+    setTimeout(() => {
+      if (!statusMessage.classList.contains('show')) {
+        statusMessage.style.height = '0';
+        statusMessage.style.marginBottom = '0';
+        statusMessage.style.padding = '0';
+      }
+    }, 300);
+  }, 5000);
+}
 
 
 
