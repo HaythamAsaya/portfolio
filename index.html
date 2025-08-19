@@ -1118,18 +1118,17 @@ V 1.0
     const formData = new FormData(contactForm);
 
     try {
-        const response = await fetch("/", {
+        // AJAX submission to Netlify
+        const response = await fetch("/?no-redirect=1", {
             method: "POST",
-            body: formData
+            body: formData,
+            headers: { "Accept": "application/json" }
         });
 
-        if ([200, 302, 303].includes(response.status)) {
+        if (response.ok) {
             showStatus("✅ Thank you! Your message has been sent successfully.", "success");
             contactForm.reset();
-
-            // Scroll message into view
             statusMessage.scrollIntoView({ behavior: "smooth", block: "center" });
-
             await sendAnalytics("contact_form_submission", Object.fromEntries(formData));
         } else if (response.status === 400) {
             showStatus("⚠️ Please complete the reCAPTCHA before submitting.", "error");
@@ -1149,6 +1148,7 @@ V 1.0
         submitBtn.disabled = false;
     }
 });
+
 
 
         // Smooth scrolling for anchor links
