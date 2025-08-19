@@ -9,7 +9,7 @@
 
 =========================
 Haytham Asaya
-V 1.0
+V 1.1
 =========================
 
 -->
@@ -1103,11 +1103,11 @@ V 1.0
         const contactForm = document.getElementById('contactForm');
         const statusMessage = document.getElementById('statusMessage');
 
-contactForm.addEventListener('submit', async (e) => {
+        contactForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  
- // Check if reCAPTCHA is completed
- const recaptchaResponse = grecaptcha.getResponse();
+
+  // Check reCAPTCHA
+  const recaptchaResponse = grecaptcha.getResponse();
   if (!recaptchaResponse) {
     showStatus('⚠️ Please complete the reCAPTCHA before submitting.', 'error');
     statusMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1126,18 +1126,18 @@ contactForm.addEventListener('submit', async (e) => {
   const formData = new FormData(contactForm);
 
   try {
-    // Netlify AJAX submission
     const response = await fetch('/?no-redirect=1', {
       method: 'POST',
       body: formData,
-      headers: { 'Accept': 'application/json' }
+      headers: { 'Accept': 'application/json' } // <-- ensures Netlify returns JSON
     });
 
-    if ([200, 302, 303].includes(response.status)) {
+    const data = await response.json(); // <-- parse the JSON
+
+    // If Netlify returns a success object
+    if (data && data.ok !== false) {
       showStatus('✅ Thank you! Your message has been sent successfully.', 'success');
       contactForm.reset();
-    } else if (response.status === 400) {
-      showStatus('⚠️ Please complete the reCAPTCHA before submitting.', 'error');
     } else {
       showStatus('❌ There was an error sending your message. Please try again.', 'error');
     }
@@ -1145,13 +1145,13 @@ contactForm.addEventListener('submit', async (e) => {
   } catch (error) {
     showStatus('⚠️ Network error. Please try again later.', 'error');
   } finally {
-    // Reset button state
     submitText.style.display = 'inline';
     submitLoader.style.display = 'none';
     submitBtn.disabled = false;
     statusMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 });
+
 
 // Show message function
 function showStatus(message, type) {
