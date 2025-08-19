@@ -963,7 +963,7 @@ V 1.0
         <div class="contact-container">
             <div class="section-title">Let's Work Together</div>
             
-            <form class="contact-form" id="contactForm" name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true">
+            <form class="contact-form" id="contactForm" name="contact" method="POST" data-netlify="true" data-netlify-recaptcha="true" netlify>
                 <input type="hidden" name="form-name" value="contact">
                 <div id="statusMessage" class="status-message"></div>
                 
@@ -1204,10 +1204,7 @@ V 1.0
             sendAnalytics('page_visit');
         });
 
-        // Social link setup (you'll need to update these URLs)
-        document.getElementById('cvLink').href = '#'; // Add your CV link
-        document.getElementById('linkedinLink').href = '#'; // Add your LinkedIn URL  
-        document.getElementById('gameLink').href = '#'; // Add your game URL
+
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1237,8 +1234,7 @@ V 1.0
             
             lastScrollTop = scrollTop;
         });
-    </script>
-<script>
+
 // Arrow scrolling
 function scrollFilmstrip(direction) {
     const container = document.getElementById('filmstrip');
