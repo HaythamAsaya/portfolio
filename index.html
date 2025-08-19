@@ -1105,6 +1105,14 @@ V 1.0
 
 contactForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+  
+ // Check if reCAPTCHA is completed
+ const recaptchaResponse = grecaptcha.getResponse();
+  if (!recaptchaResponse) {
+    showStatus('⚠️ Please complete the reCAPTCHA before submitting.', 'error');
+    statusMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
 
   const submitBtn = document.querySelector('.submit-btn');
   const submitText = document.getElementById('submitText');
