@@ -1118,24 +1118,30 @@ V 1.0
     const formData = new FormData(contactForm);
 
     try {
-        // Send form data to Netlify
         const response = await fetch("/", {
             method: "POST",
             body: formData
         });
 
-        if (response.ok) {
+        if ([200, 302, 303].includes(response.status)) {
             showStatus("✅ Thank you! Your message has been sent successfully.", "success");
             contactForm.reset();
+
+            // Scroll message into view
+            statusMessage.scrollIntoView({ behavior: "smooth", block: "center" });
+
             await sendAnalytics("contact_form_submission", Object.fromEntries(formData));
         } else if (response.status === 400) {
             showStatus("⚠️ Please complete the reCAPTCHA before submitting.", "error");
+            statusMessage.scrollIntoView({ behavior: "smooth", block: "center" });
         } else {
             showStatus("❌ Sorry, there was an error sending your message. Please try again.", "error");
+            statusMessage.scrollIntoView({ behavior: "smooth", block: "center" });
         }
 
     } catch (error) {
         showStatus("⚠️ Network error. Please try again later.", "error");
+        statusMessage.scrollIntoView({ behavior: "smooth", block: "center" });
     } finally {
         // Reset button state
         submitText.style.display = "inline";
