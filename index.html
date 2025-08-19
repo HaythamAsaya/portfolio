@@ -1,10 +1,35 @@
+ <!--
+
+         ^
+        / \
+       /   \
+      /_____\
+     /       \
+    /    _____\ 
+
+=========================
+Haytham Asaya
+V 1.0
+=========================
+
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haytham Asaya - Portfolio</title>
+    <title>Haytham Asaya - Portfolio</title><link rel="icon" type="image/x-icon" href="png.png">
+    <meta name="description" content="Haytham Asaya - Portfolio">
+    <meta name="author" content="Haytham Asaya">
+    <meta content="/png.png" itemprop="image">
+    <meta property="og:title" content="Haytham Asaya" />
+    <meta property="og:type" content="Portfolio" />
+    <meta property="og:description" content="Crafting digital experiences with passion and precision">
+    <meta property="og:url" content="https://asaya.netlify.app/" />
+    <meta property="og:image" content="https://asaya.netlify.app/png.png" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    
     <style>
 .filmstrip-container {
     position: relative;
@@ -21,6 +46,7 @@
     scroll-behavior: smooth;
     cursor: grab;
     padding-bottom: 1rem;
+    align-items: center;
 }
 
 .filmstrip:active {
@@ -37,7 +63,9 @@
 }
 
 .filmstrip-item {
-    min-width: 250px;
+    max-width: 90dvw;
+    max-width: 90dvw;
+    height: 100%;
     flex: 0 0 auto;
     border-radius: 12px;
     overflow: hidden;
@@ -48,7 +76,7 @@
 
 .filmstrip-item img {
     width: 100%;
-    height: 180px;
+    max-height: 70vh;
     object-fit: cover;
     display: block;
 }
@@ -100,8 +128,7 @@
 .filmstrip-nav.next {
     right: 0;
 }
-</style>
-    <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -876,36 +903,57 @@
     <div class="section-title">Projects</div>
 
     <div class="filmstrip-container">
-        <button class="filmstrip-nav prev" onclick="scrollFilmstrip(-1)">
+        <button class="slideshow-nav prev" onclick="scrollFilmstrip(-1)">
             <i class="fas fa-chevron-left"></i>
         </button>
 
         <div class="filmstrip" id="filmstrip">
             <div class="filmstrip-item">
-                <img src="https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=500&q=80" alt="Project 1">
+                <img src="/MATCHIN.gif" alt="Project 1">
                 <div class="filmstrip-caption">
-                    <div class="filmstrip-title">Web Application</div>
-                    <div class="filmstrip-description">Modern responsive web app with cutting-edge design</div>
+                    <div class="filmstrip-title">Matchin</div>
+                    <div class="filmstrip-description">Modern responsive web app</div>
                 </div>
             </div>
             <div class="filmstrip-item">
-                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&q=80" alt="Project 2">
+                <img src="/MarsBot.gif" alt="Project 2">
                 <div class="filmstrip-caption">
-                    <div class="filmstrip-title">Mobile App Design</div>
-                    <div class="filmstrip-description">Beautiful mobile interface with intuitive UX</div>
+                    <div class="filmstrip-title">Mars Bot</div>
+                    <div class="filmstrip-description">Artwork</div>
                 </div>
             </div>
             <div class="filmstrip-item">
-                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=500&q=80" alt="Project 3">
+                <img src="/theegg.jpg" alt="Project 3">
                 <div class="filmstrip-caption">
-                    <div class="filmstrip-title">Game Development</div>
-                    <div class="filmstrip-description">Interactive gaming experience with stunning visuals</div>
+                    <div class="filmstrip-title">The Egg</div>
+                    <div class="filmstrip-description">Artwork</div>
                 </div>
             </div>
-            <!-- Add remaining 11 items similarly -->
+            <div class="filmstrip-item">
+                <img src="/covid.gif" alt="Project 4">
+                <div class="filmstrip-caption">
+                    <div class="filmstrip-title">COVID-19</div>
+                    <div class="filmstrip-description">Artwork</div>
+                </div>
+            </div>
+            <div class="filmstrip-item">
+                <img src="/skapastilen.jpg" alt="Project 5">
+                <div class="filmstrip-caption">
+                    <div class="filmstrip-title">Skapa Stilen</div>
+                    <div class="filmstrip-description">Magazine</div>
+                </div>
+            </div>
+            <div class="filmstrip-item">
+                <img src="/beast.jpg" alt="Project 6">
+                <div class="filmstrip-caption">
+                    <div class="filmstrip-title">Rise of The Beast</div>
+                    <div class="filmstrip-description">Magazine</div>
+                </div>
+            </div>
+
         </div>
 
-        <button class="filmstrip-nav next" onclick="scrollFilmstrip(1)">
+        <button class="slideshow-nav next" onclick="scrollFilmstrip(1)">
             <i class="fas fa-chevron-right"></i>
         </button>
     </div>
