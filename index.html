@@ -9,7 +9,7 @@
 
 =========================
 Haytham Asaya
-V 1.1
+V 1.2
 =========================
 
 -->
@@ -1100,76 +1100,59 @@ V 1.1
             e.preventDefault();
             window.open('https://purrplesky.netlify.app/', '_blank'); // Replace with your game URL
         });
-        const contactForm = document.getElementById('contactForm');
-        const statusMessage = document.getElementById('statusMessage');
 
-        contactForm.addEventListener('submit', async (e) => {
+
+        
+
+        const contactForm = document.getElementById('contactForm');
+const statusMessage = document.getElementById('statusMessage');
+const submitBtn = contactForm.querySelector('.submit-btn');
+const submitText = document.getElementById('submitText');
+const submitLoader = document.getElementById('submitLoader');
+
+contactForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  // Check reCAPTCHA
-  const recaptchaResponse = grecaptcha.getResponse();
-  if (!recaptchaResponse) {
-    showStatus('⚠️ Please complete the reCAPTCHA before submitting.', 'error');
-    statusMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
+  if (!grecaptcha.getResponse()) {
+    return showStatus('⚠️ Please complete the reCAPTCHA before submitting.', 'error');
   }
-
-  const submitBtn = document.querySelector('.submit-btn');
-  const submitText = document.getElementById('submitText');
-  const submitLoader = document.getElementById('submitLoader');
 
   // Show loader
   submitText.style.display = 'none';
   submitLoader.style.display = 'inline-block';
   submitBtn.disabled = true;
 
-  const formData = new FormData(contactForm);
-
   try {
     const response = await fetch('/?no-redirect=1', {
       method: 'POST',
-      body: formData,
-      headers: { 'Accept': 'application/json' } // <-- ensures Netlify returns JSON
+      body: new FormData(contactForm),
+      headers: { 'Accept': 'application/json' }
     });
 
-    const data = await response.json(); // <-- parse the JSON
-
-    // If Netlify returns a success object
-    if (data && data.ok !== false) {
+    if (response.ok) {
       showStatus('✅ Thank you! Your message has been sent successfully.', 'success');
       contactForm.reset();
+      grecaptcha.reset();
     } else {
-      showStatus('❌ There was an error sending your message. Please try again.', 'error');
+      showStatus('❌ Error sending your message. Please try again.', 'error');
     }
-
-  } catch (error) {
+  } catch {
     showStatus('⚠️ Network error. Please try again later.', 'error');
   } finally {
     submitText.style.display = 'inline';
     submitLoader.style.display = 'none';
     submitBtn.disabled = false;
-    statusMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 });
 
-
-// Show message function
 function showStatus(message, type) {
   statusMessage.textContent = message;
   statusMessage.className = `status-message status-${type} show`;
+  statusMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-  // Auto-hide after 5 seconds
-  setTimeout(() => {
-    statusMessage.classList.remove('show');
-    setTimeout(() => {
-      if (!statusMessage.classList.contains('show')) {
-        statusMessage.style.height = '0';
-        statusMessage.style.marginBottom = '0';
-        statusMessage.style.padding = '0';
-      }
-    }, 300);
-  }, 5000);
+  setTimeout(() => statusMessage.classList.remove('show'), 5000);
 }
+
 
 
 
