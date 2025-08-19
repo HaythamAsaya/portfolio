@@ -1248,48 +1248,6 @@ function scrollFilmstrip(direction) {
         behavior: 'smooth'
     });
 }
-
-// Dragging functionality
-const filmstrip = document.getElementById('filmstrip');
-let isDragging = false;
-let startX;
-let scrollLeft;
-
-filmstrip.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    filmstrip.classList.add('active');
-    startX = e.pageX - filmstrip.offsetLeft;
-    scrollLeft = filmstrip.scrollLeft;
-});
-filmstrip.addEventListener('mouseleave', () => {
-    isDragging = false;
-});
-filmstrip.addEventListener('mouseup', () => {
-    isDragging = false;
-});
-filmstrip.addEventListener('mousemove', (e) => {
-    if(!isDragging) return;
-    e.preventDefault();
-    const x = e.pageX - filmstrip.offsetLeft;
-    const walk = (x - startX) * 2;
-    filmstrip.scrollLeft = scrollLeft - walk;
-});
-
-// Touch events
-filmstrip.addEventListener('touchstart', (e) => {
-    isDragging = true;
-    startX = e.touches[0].pageX - filmstrip.offsetLeft;
-    scrollLeft = filmstrip.scrollLeft;
-});
-filmstrip.addEventListener('touchend', () => {
-    isDragging = false;
-});
-filmstrip.addEventListener('touchmove', (e) => {
-    if(!isDragging) return;
-    const x = e.touches[0].pageX - filmstrip.offsetLeft;
-    const walk = (x - startX) * 2;
-    filmstrip.scrollLeft = scrollLeft - walk;
-});
 </script>
 
 </body>
