@@ -9,7 +9,7 @@
 
 =========================
 Haytham Asaya
-V 2.0
+V 2.1
 =========================
 
 -->
@@ -62,9 +62,7 @@ V 2.0
 }
 
 .filmstrip-item {
-    max-width: 90dvw;
-    max-width: 90dvw;
-    height: 100%;
+    width: min-content;
     flex: 0 0 auto;
     border-radius: 12px;
     overflow: hidden;
@@ -74,9 +72,10 @@ V 2.0
 }
 
 .filmstrip-item img {
-    width: 100%;
-    max-height: 70vh;
-    object-fit: cover;
+    min-width: 30vw;
+    max-width: 80vw;
+    max-height: 80vh;
+    object-fit: contain;
     display: block;
 }
 
@@ -903,7 +902,9 @@ V 2.0
     <div class="section-title">Projects</div>
 
     <div class="filmstrip-container">
-        <button class="slideshow-nav prev" onclick="scrollFilmstrip(-1)">
+        <button class="slideshow-nav prev" onmousedown="startScrolling(-1)" 
+        onmouseup="stopScrolling()" 
+        onmouseleave="stopScrolling()">
             <i class="fas fa-chevron-left"></i>
         </button>
 
@@ -974,7 +975,9 @@ V 2.0
 
         </div>
 
-        <button class="slideshow-nav next" onclick="scrollFilmstrip(1)">
+        <button class="slideshow-nav next" onmousedown="startScrolling(1)" 
+        onmouseup="stopScrolling()" 
+        onmouseleave="stopScrolling()">
             <i class="fas fa-chevron-right"></i>
         </button>
     </div>
@@ -1214,14 +1217,40 @@ function showStatus(message, type) {
         });
 
 // Arrow scrolling
-function scrollFilmstrip(direction) {
-    const container = document.getElementById('filmstrip');
-    const scrollAmount = 300;
-    container.scrollBy({
-        left: direction * scrollAmount,
-        behavior: 'smooth'
-    });
+const container = document.getElementById('filmstrip');
+let scrollInterval = null;
+
+function startScrolling(direction) {
+    if (scrollInterval) return; // avoid multiple intervals
+
+    scrollInterval = setInterval(() => {
+        // scroll 8px per step — fast enough on desktop, not too fast on mobile
+        container.scrollBy(direction * 8, 0);
+    }, 10); // repeat every 10ms
 }
+
+function stopScrolling() {
+    clearInterval(scrollInterval);
+    scrollInterval = null;
+}
+
+// Attach to your existing buttons
+const buttons = document.querySelectorAll('button');
+
+buttons[0].addEventListener('mousedown', () => startScrolling(-1));
+buttons[0].addEventListener('mouseup', stopScrolling);
+buttons[0].addEventListener('mouseleave', stopScrolling);
+buttons[0].addEventListener('touchstart', (e) => { e.preventDefault(); startScrolling(-1); });
+buttons[0].addEventListener('touchend', stopScrolling);
+
+buttons[1].addEventListener('mousedown', () => startScrolling(1));
+buttons[1].addEventListener('mouseup', stopScrolling);
+buttons[1].addEventListener('mouseleave', stopScrolling);
+buttons[1].addEventListener('touchstart', (e) => { e.preventDefault(); startScrolling(1); });
+buttons[1].addEventListener('touchend', stopScrolling);
+
+
+
 </script>
 
 </body>
