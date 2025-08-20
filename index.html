@@ -9,7 +9,7 @@
 
 =========================
 Haytham Asaya
-V 1.2
+V 2.0
 =========================
 
 -->
@@ -36,7 +36,6 @@ V 1.2
     max-width: 1000px;
     margin: 0 auto;
     overflow: hidden;
-    padding: 1rem 0;
 }
 
 .filmstrip {
@@ -853,13 +852,13 @@ V 1.2
     <section class="hero">
         <div class="hero-content">
             <h1>Haytham Asaya</h1>
-            <p>Crafting digital experiences with passion and precision</p>
+            <p>I design and strategize digital experiences that captivate, perform, and deliver results-turning ideas into impactful realities.</p>
             <a href="#contact" class="cta-button">Get In Touch</a>
         </div>
     </section>
 
     <section class="slideshow-section">
-        <div class="section-title">My Work</div>
+        <div class="section-title">Services</div>
         
         <div class="slideshow-container" id="slideshowContainer">
             <div class="slide active">
@@ -909,45 +908,66 @@ V 1.2
 
         <div class="filmstrip" id="filmstrip">
             <div class="filmstrip-item">
-                <img src="/MATCHIN.gif" alt="Project 1">
+                <img src="/beast.jpg" alt="Project 1">
                 <div class="filmstrip-caption">
-                    <div class="filmstrip-title">Matchin</div>
-                    <div class="filmstrip-description">Modern responsive web app</div>
+                    <div class="filmstrip-title">Rise of The Beast - Poster Design</div>
+                    <div class="filmstrip-description">Designed an eye-catching poster that guides participants to the event location while generating excitement to join.</div>
                 </div>
             </div>
             <div class="filmstrip-item">
                 <img src="/MarsBot.gif" alt="Project 2">
                 <div class="filmstrip-caption">
-                    <div class="filmstrip-title">Mars Bot</div>
-                    <div class="filmstrip-description">Artwork</div>
+                    <div class="filmstrip-title">Mars Bot – Conversational AI Assistant</div>
+                    <div class="filmstrip-description">Built a chatbot prototype powered by natural language processing. Focused on intuitive UI and seamless interactions, achieving high usability scores in user testing.</div>
                 </div>
             </div>
             <div class="filmstrip-item">
                 <img src="/theegg.jpg" alt="Project 3">
                 <div class="filmstrip-caption">
-                    <div class="filmstrip-title">The Egg</div>
-                    <div class="filmstrip-description">Artwork</div>
+                    <div class="filmstrip-title">The Egg – Interactive Storytelling Experience</div>
+                    <div class="filmstrip-description">Created a narrative-driven web experience combining animation, UX storytelling, and responsive design. Demonstrated ability to merge creativity with technical execution.</div>
                 </div>
             </div>
             <div class="filmstrip-item">
                 <img src="/covid.gif" alt="Project 4">
                 <div class="filmstrip-caption">
-                    <div class="filmstrip-title">COVID-19</div>
-                    <div class="filmstrip-description">Artwork</div>
+                    <div class="filmstrip-title">COVID19 - Graphic Design Showcase</div>
+                    <div class="filmstrip-description">Delivered branding and design assets including posters, digital ads, and social content. Emphasized clean visuals and strong brand alignment to drive higher campaign engagement.</div>
                 </div>
             </div>
             <div class="filmstrip-item">
                 <img src="/skapastilen.jpg" alt="Project 5">
                 <div class="filmstrip-caption">
-                    <div class="filmstrip-title">Skapa Stilen</div>
-                    <div class="filmstrip-description">Magazine</div>
+                    <div class="filmstrip-title">Skapa Stilen - Magazine</div>
+                    <div class="filmstrip-description">This magazine highlights the company’s products and showcases how customers use them most effectively, including choices like building colors, ventilation design, door types, and more.</div>
                 </div>
             </div>
             <div class="filmstrip-item">
-                <img src="/beast.jpg" alt="Project 6">
+                <img src="/MATCHIN.gif" alt="Project 6">
                 <div class="filmstrip-caption">
-                    <div class="filmstrip-title">Rise of The Beast</div>
-                    <div class="filmstrip-description">Magazine</div>
+                    <div class="filmstrip-title">Matchin - Social Planner Web App</div>
+                    <div class="filmstrip-description">Designed and developed a responsive web application for social planning. Improved user onboarding and engagement by 40% through refined UX flows and performance optimization.</div>
+                </div>
+            </div>
+            <div class="filmstrip-item">
+                <img src="/pop-elephant.gif" alt="Project 7">
+                <div class="filmstrip-caption">
+                    <div class="filmstrip-title">Pop Elephant</div>
+                    <div class="filmstrip-description">Created a dynamic pop-art animation of an elephant from multiple angles, showcasing bold colors, movement, and a playful perspective. Designed to engage viewers and highlight creative experimentation with form and style.</div>
+                </div>
+            </div>
+            <div class="filmstrip-item">
+                <img src="/sgh animation.gif" alt="Project 8">
+                <div class="filmstrip-caption">
+                    <div class="filmstrip-title">SGH animation</div>
+                    <div class="filmstrip-description">Animated the step-by-step process Swedengreenhouse uses to build their premium wooden greenhouses, presenting it as simple and intuitive as assembling Lego blocks.</div>
+                </div>
+            </div>
+            <div class="filmstrip-item">
+                <img src="/Bisnode---Roll-up-&-Banner.jpg" alt="Project 9">
+                <div class="filmstrip-caption">
+                    <div class="filmstrip-title">Bisnode Business Contacts</div>
+                    <div class="filmstrip-description">Designed cohesive event visuals for Bisnode’s ‘Bisnode Business Contacts,’ including a web banner and print roll-up. The design balances professionalism and clarity, creating a strong, recognizable presence for the event.</div>
                 </div>
             </div>
 
@@ -1043,41 +1063,48 @@ V 1.2
         }
 
         // Slideshow functionality
-        let currentSlide = 0;
-        const totalSlides = 3;
+let currentSlide = 0;
+const totalSlides = 3;
 
-        function changeSlide(direction) {
-            const slideElements = document.querySelectorAll('.slide');
-            const indicatorElements = document.querySelectorAll('.indicator');
-            
-            slideElements[currentSlide].classList.remove('active');
-            indicatorElements[currentSlide].classList.remove('active');
-            
-            currentSlide += direction;
-            if (currentSlide >= totalSlides) currentSlide = 0;
-            if (currentSlide < 0) currentSlide = totalSlides - 1;
-            
-            slideElements[currentSlide].classList.add('active');
-            indicatorElements[currentSlide].classList.add('active');
-        }
+let autoPlay = setInterval(() => changeSlide(1, false), 5000);
+let stopped = false;
 
-        function goToSlide(index) {
-            const slideElements = document.querySelectorAll('.slide');
-            const indicatorElements = document.querySelectorAll('.indicator');
-            
-            slideElements[currentSlide].classList.remove('active');
-            indicatorElements[currentSlide].classList.remove('active');
-            
-            currentSlide = index;
-            
-            slideElements[currentSlide].classList.add('active');
-            indicatorElements[currentSlide].classList.add('active');
-        }
+function changeSlide(direction, isManual = true) {
+    if (isManual && !stopped) {
+        clearInterval(autoPlay); // stop autoplay only on manual use
+        stopped = true;
+    }
 
-        // Auto-play slideshow
-        setInterval(() => {
-            changeSlide(1);
-        }, 5000);
+    const slideElements = document.querySelectorAll('.slide');
+    const indicatorElements = document.querySelectorAll('.indicator');
+
+    slideElements[currentSlide].classList.remove('active');
+    indicatorElements[currentSlide].classList.remove('active');
+
+    currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+
+    slideElements[currentSlide].classList.add('active');
+    indicatorElements[currentSlide].classList.add('active');
+}
+
+function goToSlide(index, isManual = true) {
+    if (isManual && !stopped) {
+        clearInterval(autoPlay); // stop autoplay only on manual use
+        stopped = true;
+    }
+
+    const slideElements = document.querySelectorAll('.slide');
+    const indicatorElements = document.querySelectorAll('.indicator');
+
+    slideElements[currentSlide].classList.remove('active');
+    indicatorElements[currentSlide].classList.remove('active');
+
+    currentSlide = index;
+
+    slideElements[currentSlide].classList.add('active');
+    indicatorElements[currentSlide].classList.add('active');
+}
+
 
         // Privacy info toggle
         function togglePrivacyInfo() {
