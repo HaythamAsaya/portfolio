@@ -9,7 +9,7 @@
 
 =========================
 Haytham Asaya
-V 2.2
+V 3.0
 =========================
 
 -->
@@ -901,11 +901,7 @@ V 2.2
     <div class="section-title">Projects</div>
 
     <div class="filmstrip-container">
-        <button class="slideshow-nav prev" onmousedown="startScrolling(-1)" 
-        onmouseup="stopScrolling()" 
-        onmouseleave="stopScrolling()">
-            <i class="fas fa-chevron-left"></i>
-        </button>
+        
 
         <div class="filmstrip" id="filmstrip">
             <div class="filmstrip-item">
@@ -974,11 +970,7 @@ V 2.2
 
         </div>
 
-        <button class="slideshow-nav next" onmousedown="startScrolling(1)" 
-        onmouseup="stopScrolling()" 
-        onmouseleave="stopScrolling()">
-            <i class="fas fa-chevron-right"></i>
-        </button>
+        
     </div>
     </section>
 
@@ -1213,38 +1205,6 @@ function showStatus(message, type) {
             lastScrollTop = scrollTop;
         });
 
-// Arrow scrolling
-const container = document.getElementById('filmstrip');
-let scrollInterval = null;
-
-function startScrolling(direction) {
-    if (scrollInterval) return; // avoid multiple intervals
-
-    scrollInterval = setInterval(() => {
-        // scroll 8px per step — fast enough on desktop, not too fast on mobile
-        container.scrollBy(direction * 8, 0);
-    }, 10); // repeat every 10ms
-}
-
-function stopScrolling() {
-    clearInterval(scrollInterval);
-    scrollInterval = null;
-}
-
-// Attach to your existing buttons
-const buttons = document.querySelectorAll('button');
-
-buttons[0].addEventListener('mousedown', () => startScrolling(-1));
-buttons[0].addEventListener('mouseup', stopScrolling);
-buttons[0].addEventListener('mouseleave', stopScrolling);
-buttons[0].addEventListener('touchstart', (e) => { e.preventDefault(); startScrolling(-1); });
-buttons[0].addEventListener('touchend', stopScrolling);
-
-buttons[1].addEventListener('mousedown', () => startScrolling(1));
-buttons[1].addEventListener('mouseup', stopScrolling);
-buttons[1].addEventListener('mouseleave', stopScrolling);
-buttons[1].addEventListener('touchstart', (e) => { e.preventDefault(); startScrolling(1); });
-buttons[1].addEventListener('touchend', stopScrolling);
 
 
 
