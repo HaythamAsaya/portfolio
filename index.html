@@ -9,7 +9,7 @@
 
 =========================
 Haytham Asaya
-V 3.1
+V 3.2
 =========================
 
 -->
@@ -263,13 +263,13 @@ V 3.1
 
         /* Hero Section - Mobile First */
         .hero {
-            height: 100vh;
+            height: 70vh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
-            padding: 1rem;
+            padding: 3rem 1rem 0rem 1rem;
         }
 
         .hero-content {
@@ -649,6 +649,7 @@ V 3.1
 
             .hero {
                 padding: 2rem;
+                height: 100vh;
             }
 
             .hero h1 {
@@ -826,6 +827,64 @@ V 3.1
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+        .plus {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            cursor: pointer;
+            animation: pulse 2s infinite ease-in-out;
+            margin:2rem
+        }
+        
+        .plus::before,
+        .plus::after {
+            content: '';
+            position: absolute;
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+        }
+        
+        .plus::before {
+            width: 8px;
+            height: 80px;
+            left: 36px;
+            top: 0;
+        }
+        
+        .plus::after {
+            width: 80px;
+            height: 8px;
+            left: 0;
+            top: 36px;
+        }
+        
+        .plus:hover {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .rc-anchor-light.rc-anchor-normal, .rc-anchor-light.rc-anchor-compact {
+    border: none;
+    }
+    .rc-anchor-light {
+    background: none;
+    color: #6366f1;
+}
     </style>
 </head>
     <body data-theme="dark">
@@ -968,6 +1027,13 @@ V 3.1
                 <div class="filmstrip-caption">
                     <div class="filmstrip-title">Bisnode Business Contacts</div>
                     <div class="filmstrip-description">Designed cohesive event visuals for Bisnode’s ‘Bisnode Business Contacts,’ including a web banner and print roll-up. The design balances professionalism and clarity, creating a strong, recognizable presence for the event.</div>
+                </div>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="filmstrip-item">
+                <div class="plus"></div>
+                <div class="filmstrip-caption">
+                    <div class="filmstrip-title">Coming soon</div>
+                    <div class="filmstrip-description">More projects will be added soon</div>
                 </div>
             </a>
 
