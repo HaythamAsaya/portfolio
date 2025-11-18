@@ -263,13 +263,14 @@ V 3.3
 
         /* Hero Section - Mobile First */
         .hero {
-            height: 100vh;
+            min-height: 70vh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
             padding: 3rem 1rem 0rem 1rem;
+            animation: shrink 10s ease;
         }
 
         .hero-content {
@@ -296,6 +297,7 @@ V 3.3
             margin-bottom: 2rem;
             animation: fadeInUp 1s ease 0.3s both;
             line-height: 1.5;
+            
         }
 
         .cta-button {
@@ -650,8 +652,9 @@ ease-in-out
             }
 
             .hero {
-                padding: 2rem;
-                height: 100vh;
+                min-height: 70vh;
+                padding: 4rem 2rem 2rem;
+                animation: shrink 10s ease;
             }
 
             .hero h1 {
@@ -780,6 +783,17 @@ ease-in-out
             to {
                 opacity: 1;
                 transform: translateX(0);
+            }
+        }
+
+        @keyframes shrink {
+            from {
+                height: 100dvh;
+                height: 100vh;
+            }
+            to {
+                height: 70dvh;
+                height: 70vh;
             }
         }
 
