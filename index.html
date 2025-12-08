@@ -9,7 +9,7 @@
 
 =========================
 Haytham Asaya
-V 3.3
+V 3.4
 =========================
 
 -->
@@ -263,7 +263,7 @@ V 3.3
 
         /* Hero Section - Mobile First */
         .hero {
-            min-height: 90vh;
+            min-height: 60vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -333,8 +333,8 @@ V 3.3
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: pulse 15s infinite 
-ease-in-out
+           /* animation: pulse 15s infinite 
+ease-in-out */
         }
 
         .slideshow-container {
@@ -453,14 +453,14 @@ ease-in-out
         }
 
         .contact-form {
-            background: var(--bg-card);
-            padding: 2rem 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 15px 30px var(--shadow);
+            /* background: var(--bg-card); */
+            padding: 0rem 1.5rem 2rem;
+            /* border-radius: 15px; */
+            /* box-shadow: 0 15px 30px var(--shadow); */
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         label {
@@ -652,7 +652,7 @@ ease-in-out
             }
 
             .hero {
-                min-height: 90vh;
+                min-height: 70vh;
                 padding: 4rem 2rem 2rem;
                 animation: shrink 3s ease-out forwards;
             }
@@ -734,12 +734,13 @@ ease-in-out
             }
 
             .contact-form {
-                padding: 3rem;
-                border-radius: 20px;
+                padding: 0;
+                border-radius: 0;
+                background: none;
             }
 
             .form-group {
-                margin-bottom: 2rem;
+                margin-bottom: 1.5rem;
             }
 
             label {
@@ -792,8 +793,8 @@ ease-in-out
                 height: 100vh;
             }
             to {
-                height: 90dvh;
-                height: 90vh;
+                height: 70dvh;
+                height: 70vh;
             }
         }
 
