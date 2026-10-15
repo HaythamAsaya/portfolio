@@ -9,7 +9,7 @@
 
 =========================
 Haytham Asaya
-V 3.6
+V 3.7
 =========================
 
 -->
@@ -34,7 +34,8 @@ V 3.6
 .filmstrip-container {
     position: relative;
     margin: 0 auto;
-    overflow: hidden;
+    overflow: visible;
+    width: 100%;
 }
 
 .filmstrip {
@@ -764,6 +765,39 @@ ease-in-out */
                 font-size: 1.1rem;
             }
         }
+        .filmstrip-section {
+    height: 400vh;
+    view-timeline-name: --filmstrip;
+    view-timeline-axis: block;
+}
+
+.filmstrip-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.filmstrip {
+    display: flex;
+    width: max-content;
+    overflow: visible;
+
+    animation: move-horizontal linear both;
+    animation-timeline: --filmstrip;
+    animation-range: contain;
+}
+
+@keyframes move-horizontal {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(
+            calc(100vw - 100% - 70px)
+        );
+    }
+}
 
         /* Animations */
         @keyframes fadeInUp {
@@ -872,6 +906,7 @@ ease-in-out */
             animation: spin 1s linear infinite;
         }
         
+        
         @keyframes pulse {
             0%, 100% { 
                 transform: scale(1);
@@ -970,7 +1005,8 @@ ease-in-out */
         </div>
 <br><br><br>
     <!-- <div class="section-title">Projects</div> -->
-
+<section class="filmstrip-section">
+  <div class="filmstrip-sticky">
     <div class="filmstrip-container">
         
 
@@ -1067,6 +1103,7 @@ If you enjoy clicker games that reward precision and quick reflexes, this one’
 
         
     </div>
+  </div></section>
     </section>
 
     <section class="contact-section" id="contact">
